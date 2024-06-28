@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  agent_id: 1
+  name: MyString
+  alias: MyString
+  birth_date: 2024-06-28
+  webpage: MyString
+
+two:
+  agent_id: 1
+  name: MyString
+  alias: MyString
+  birth_date: 2024-06-28
+  webpage: MyString
