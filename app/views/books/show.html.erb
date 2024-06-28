@@ -1,3 +1,32 @@
 <!-- app/views/books/show.html.erb -->
 <h1><%= @book.title %></h1>
 <p><%= @book.description %></p>
+
+<h2>Details</h2>
+<p>Downloads: <%= @book.downloads %></p>
+<p>License: <%= @book.license %></p>
+
+<h2>Resources</h2>
+<% @book.resources.each do |resource| %>
+  <p>
+    <strong>Type:</strong> <%= resource.resource_type %><br>
+    <strong>URI:</strong> <%= link_to resource.uri, resources_path %>
+  </p>
+<% end %>
+
+<h2>Agents</h2>
+<% @book.agents.each do |agent| %>
+  <p>
+    <strong>Name:</strong> <%= link_to agent.name, agent_path(agent) %><br>
+    <strong>Alias:</strong> <%= agent.alias %><br>
+    <strong>Birth Date:</strong> <%= agent.birth_date %><br>
+    <strong>Webpage:</strong> <%= link_to agent.webpage, agent.webpage %>
+  </p>
+<% end %>
+
+<h2>Subjects</h2>
+<% @book.subjects.each do |subject| %>
+  <p>
+    <strong>Name:</strong> <%= link_to subject.name, subject_path(subject) %>
+  </p>
+<% end %>

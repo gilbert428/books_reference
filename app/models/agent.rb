@@ -3,6 +3,5 @@ class Agent < ApplicationRecord
   has_many :books, through: :agents_books
 
   validates :name, presence: true
-  validates :alias, uniqueness: true
 
 end
