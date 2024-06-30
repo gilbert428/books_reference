@@ -1,0 +1,23 @@
+<h1>Search Results</h1>
+
+<% if @results.any? %>
+  <% @results.each do |result| %>
+    <div>
+      <% if result.is_a?(Book) %>
+        <h2>Book: <%= link_to result.title, book_path(result) %></h2>
+        <p><%= result.description %></p>
+      <% elsif result.is_a?(Agent) %>
+        <h2>Agent: <%= link_to result.name, agent_path(result) %></h2>
+        <p><%= result.alias %></p>
+      <% elsif result.is_a?(Resource) %>
+        <h2>Resource: <%= result.resource_id %></h2>
+        <p><%= link_to result.uri, resource_path(result) %></p>
+        <p>Type: <%= result.resource_type %></p>
+      <% elsif result.is_a?(Subject) %>
+        <h2>Subject: <%= link_to result.name, subject_path(result) %></h2>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <p>No results found.</p>
+<% end %>
