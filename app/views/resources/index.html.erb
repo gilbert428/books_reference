@@ -8,3 +8,5 @@
     <p>Book: <%= link_to resource.book.title, book_path(resource.book) %></p>
   </div>
 <% end %>
+
+<%= paginate @resources %>

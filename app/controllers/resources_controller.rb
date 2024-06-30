@@ -1,5 +1,5 @@
 class ResourcesController < ApplicationController
   def index
-    @resources = Resource.all
+    @resources = Resource.page(params[:page]).per(10)
   end
 end

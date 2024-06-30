@@ -1,2 +1,14 @@
-<h1>Agents#index</h1>
-<p>Find me in app/views/agents/index.html.erb</p>
+<h1>Agents</h1>
+
+<% @agents.each do |agent| %>
+  <div>
+    <h2>Agent ID: <%= agent.id %></h2>
+    <p>Name: <%= agent.name %></p>
+    <h3>Books:</h3>
+    <ul>
+      <% agent.books.each do |book| %>
+        <li><%= link_to book.title, book_path(book) %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
