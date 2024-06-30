@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 root "books#index"
+
+get 'home/index'
+get 'home/about', as: :about
+
 resources :books
 resources :resources
 resources :subjects

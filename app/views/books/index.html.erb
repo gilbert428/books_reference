@@ -1,7 +1,18 @@
-<!-- app/views/books/index.html.erb -->
-<h1>All Books</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Books Index</title>
+</head>
+<body>
+  <h1>All Books</h1>
 
-<% @books.each do |book| %>
-  <h2><%= link_to book.title, book_path(book) %></h2>
-  <p><%= book.description %></p>
-<% end %>
+  <% @books.each do |book| %>
+    <h2><%= link_to book.title, book_path(book) %></h2>
+    <p><%= book.description %></p>
+  <% end %>
+
+  <div>
+    <%= paginate @books %>
+  </div>
+</body>
+</html>
