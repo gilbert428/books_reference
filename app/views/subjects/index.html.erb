@@ -1,2 +1,14 @@
-<h1>Subjects#index</h1>
-<p>Find me in app/views/subjects/index.html.erb</p>
+<h1>Subjects</h1>
+
+<% @subjects.each do |subject| %>
+  <div>
+    <h2>Subject ID: <%= subject.id %></h2>
+    <p>Name: <%= subject.name %></p>
+    <h3>Books:</h3>
+    <ul>
+      <% subject.books.each do |book| %>
+        <li><%= link_to book.title, book_path(book) %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
