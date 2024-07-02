@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @subject.name %>
+</p>
+
+<h2>Books</h2>
+<ul>
+  <% @subject.books.each do |book| %>
+    <li><%= link_to book.title, book_path(book) %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back', subjects_path %>

@@ -20,76 +20,51 @@ agents_data = JSON.parse(URI.open(agent_url).read)
 books_data = JSON.parse(URI.open(book_url).read)
 subjects_data = JSON.parse(URI.open(subject_url).read)
 
-
 # Seed Subjects
-
-  subjects_data['results'].each do |subject|
-    next if subjects_data['next'].nil?
-    Subject.find_or_create_by!(
-      subject_id: subject['id'],
-      name: subject['name']
-    )
-  end
-
-
+subjects_data['results'].each do |subject|
+  Subject.find_or_create_by!(
+    name: subject['name']
+  )
+end
 
 # Seed Agents
 agents_data['results'].each do |agent|
-  next if agent['id'].nil?
-
   new_agent = Agent.find_or_create_by!(
-    agent_id: agent['id'],
-    name: agent['person']['name'],
-    alias: agent['person']['alias'],
-    birth_date: agent['person']['birth_date'],
-    webpage: agent['person']['webpage']
+    name: agent['person']['name']
   )
 
-  if new_agent.persisted?
-    # Seed Books and Resources
-    books_data['results'].each do |book|
-      new_book = Book.find_or_create_by!(
-        book_id: book['id'],
-        title: book['title'],
-        description: book['description'],
-        downloads: book['downloads'],
-        license: book['license']
+  # Seed Books and Resources
+  books_data['results'].each do |book|
+    new_book = Book.find_or_create_by!(
+      title: book['title'],
+      downloads: book['downloads']
+    )
+
+    # Seed Resources
+    book['resources'].each do |resource|
+      Resource.find_or_create_by!(
+        book: new_book,
+        uri: resource['uri'],
+        resource_type: resource['type']
       )
+    end
 
-      # Seed Resources
-      book['resources'].each do |resource|
-        Resource.find_or_create_by!(
-          resource_id: resource['id'],
-          book: new_book,
-          uri: resource['uri'],
-          resource_type: resource['type']
-        )
+    # Seed Book-Agent Associations
+    book['agents'].each do |book_agent|
+      if book_agent['id'] == agent['id']
+        new_agent.books << new_book unless new_agent.books.include?(new_book)
       end
+    end
 
-      # Seed Book-Agent Associations
-      book['agents'].each do |agent|
-        if agent['id'] == new_agent.agent_id
-          AgentsBook.find_or_create_by!(
-            agent: new_agent,
-            book: new_book
-          )
-        end
-      end
-
-      # Seed Book-Subject Associations
-      book['subjects'].each do |subject|
-        subject_record = Subject.find_by(name: subject)
-        if subject_record
-          BooksSubject.find_or_create_by!(
-            book: new_book,
-            subject: subject_record
-          )
-        else
-          puts "Subject #{subject} not found"
-        end
-      end
-
+    # Seed Book-Subject Associations
+    book['subjects'].each do |book_subject|
+      subject = Subject.find_by(name: book_subject)
+      new_book.subjects << subject unless new_book.subjects.include?(subject)
     end
   end
 end
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+AdminUser.find_or_create_by!(email: 'admin@example.com') do |user|
+  user.password = 'password'
+  user.password_confirmation = 'password'
+end if Rails.env.development?

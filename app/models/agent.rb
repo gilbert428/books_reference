@@ -1,6 +1,5 @@
 class Agent < ApplicationRecord
-  has_many :agents_books
-  has_many :books, through: :agents_books
+  has_and_belongs_to_many :books, join_table: :agents_books
 
   validates :name, presence: true
 
