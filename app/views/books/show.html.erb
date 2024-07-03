@@ -1,10 +1,14 @@
-<!-- app/views/books/show.html.erb -->
 <h1><%= @book.title %></h1>
 <p><%= @book.description %></p>
 
 <h2>Details</h2>
 <p>Downloads: <%= @book.downloads %></p>
 <p>License: <%= @book.license %></p>
+
+<% if @book.image.attached? %>
+  <h2>Image</h2>
+  <%= image_tag url_for(@book.image) %>
+<% end %>
 
 <h2>Resources</h2>
 <% @book.resources.each do |resource| %>

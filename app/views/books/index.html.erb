@@ -7,6 +7,7 @@
       <th>Description</th>
       <th>Downloads</th>
       <th>License</th>
+      <th>Image</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,7 +19,16 @@
         <td><%= book.description %></td>
         <td><%= book.downloads %></td>
         <td><%= book.license %></td>
+        <td>
+          <% if book.image.attached? %>
+            <%= image_tag url_for(book.image), size: "50x50" %>
+          <% else %>
+            <span>No image</span>
+          <% end %>
+        </td>
         <td><%= link_to 'Show', book %></td>
+        <td><%= link_to 'Edit', edit_book_path(book) %></td>
+        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
