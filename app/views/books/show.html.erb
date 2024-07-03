@@ -1,36 +1,36 @@
-<h1><%= @book.title %></h1>
-<p><%= @book.description %></p>
+<h1 class="text-2xl font-bold"><%= @book.title %></h1>
+<p class="mb-4"><%= @book.description %></p>
 
-<h2>Details</h2>
+<h2 class="text-xl font-semibold mt-6">Details</h2>
 <p>Downloads: <%= @book.downloads %></p>
 <p>License: <%= @book.license %></p>
 
 <% if @book.image.attached? %>
-  <h2>Image</h2>
-  <%= image_tag url_for(@book.image) %>
+  <h2 class="text-xl font-semibold mt-6">Image</h2>
+  <%= image_tag url_for(@book.image), class: "w-full h-auto" %>
 <% end %>
 
-<h2>Resources</h2>
+<h2 class="text-xl font-semibold mt-6">Resources</h2>
 <% @book.resources.each do |resource| %>
-  <p>
+  <p class="border-b py-2">
     <strong>Type:</strong> <%= resource.resource_type %><br>
-    <strong>URI:</strong> <%= link_to resource.uri, resources_path %>
+    <strong>URI:</strong> <%= link_to resource.uri, resources_path, class: "text-blue-500" %>
   </p>
 <% end %>
 
-<h2>Agents</h2>
+<h2 class="text-xl font-semibold mt-6">Agents</h2>
 <% @book.agents.each do |agent| %>
-  <p>
-    <strong>Name:</strong> <%= link_to agent.name, agent_path(agent) %><br>
+  <p class="border-b py-2">
+    <strong>Name:</strong> <%= link_to agent.name, agent_path(agent), class: "text-blue-500" %><br>
     <strong>Alias:</strong> <%= agent.alias %><br>
     <strong>Birth Date:</strong> <%= agent.birth_date %><br>
-    <strong>Webpage:</strong> <%= link_to agent.webpage, agent.webpage %>
+    <strong>Webpage:</strong> <%= link_to agent.webpage, agent.webpage, class: "text-blue-500" %>
   </p>
 <% end %>
 
-<h2>Subjects</h2>
+<h2 class="text-xl font-semibold mt-6">Subjects</h2>
 <% @book.subjects.each do |subject| %>
-  <p>
-    <strong>Name:</strong> <%= link_to subject.name, subject_path(subject) %>
+  <p class="border-b py-2">
+    <strong>Name:</strong> <%= link_to subject.name, subject_path(subject), class: "text-blue-500" %>
   </p>
 <% end %>
