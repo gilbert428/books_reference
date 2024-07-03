@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
+  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
+  <%= stylesheet_link_tag 'active_admin', media: 'all' if controller.class < ActiveAdmin::BaseController %>
+  <%= javascript_include_tag 'active_admin' if controller.class < ActiveAdmin::BaseController %>
   <style>
     /* Basic styles for the navigation bar */
     .navbar {
@@ -76,6 +77,7 @@
     <a href="<%= resources_path %>">Resources</a>
     <a href="<%= subjects_path %>">Subjects</a>
     <a href="<%= about_path %>">About</a>
+    <a href="<%= admin_root_path %>">Admin</a>
     <div class="search-container">
       <%= form_with(url: search_path, method: :get, local: true) do %>
         <input type="text" placeholder="Search..." name="q">
