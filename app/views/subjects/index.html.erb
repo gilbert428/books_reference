@@ -1,20 +1,20 @@
-<h1>Subjects</h1>
+<h1 class="text-4xl font-bold text-gray-900 mb-4">Subjects</h1>
 
-<table>
+<table class="min-w-full bg-white border border-gray-200">
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Number of Books</th>
-      <th colspan="2"></th>
+    <tr class="w-full bg-gray-100 border-b">
+      <th class="py-2 px-4 text-left">Name</th>
+      <th class="py-2 px-4 text-left">Number of Books</th>
+      <th colspan="2" class="py-2 px-4"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @subjects.each do |subject| %>
-      <tr>
-        <td><%= link_to subject.name, subject %></td>
-        <td><%= subject.books.count %></td>
-        <td><%= link_to 'Show', subject %></td>
+      <tr class="border-b hover:bg-gray-50">
+        <td class="py-2 px-4"><%= link_to subject.name, subject, class: "text-blue-500 hover:underline" %></td>
+        <td class="py-2 px-4"><%= subject.books.count %></td>
+        <td class="py-2 px-4"><%= link_to 'Show', subject, class: "text-blue-500 hover:underline" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Subject', new_subject_path %>
+<%= link_to 'New Subject', new_subject_path, class: "inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700" %>

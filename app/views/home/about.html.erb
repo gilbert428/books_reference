@@ -1,4 +1,11 @@
 <div class="content">
-  <h1>About Us</h1>
-  <p>Welcome to the About page. Here you can add information about your application, team, mission, etc.</p>
+  <h1>About Book Reference</h1>
+  <p>For this project, the data will be pulled from external APIs, which include information about agents, books, and subjects. 
+    The datasets are structured to represent a library system where books are associated with agents (authors or contributors) and categorized under various subjects. </p>
+
+Integration of Different Datasets
+
+<p>The data from the different sources (agents, books, subjects) will be integrated using their unique identifiers. The relationships between books, agents, and subjects will be established through join tables (AgentsBooks and BooksSubjects). This structure allows for a many-to-many relationship between books and agents, as well as between books and subjects. Resources related to each book will be linked using the book_id as a foreign key.
+By organizing the data in this way, the system will efficiently manage and query information about books, their authors, and subjects, along with associated resources.
+
 </div>

@@ -1,15 +1,15 @@
-<p id="notice"><%= notice %></p>
+<p id="notice" class="text-green-600"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong class="font-bold text-gray-700">Name:</strong>
   <%= @subject.name %>
 </p>
 
-<h2>Books</h2>
-<ul>
+<h2 class="text-2xl font-semibold text-gray-900 mt-4">Books</h2>
+<ul class="list-disc list-inside mt-2">
   <% @subject.books.each do |book| %>
-    <li><%= link_to book.title, book_path(book) %></li>
+    <li><%= link_to book.title, book_path(book), class: "text-blue-500 hover:underline" %></li>
   <% end %>
 </ul>
 
-<%= link_to 'Back', subjects_path %>
+<%= link_to 'Back', subjects_path, class: "inline-block mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700" %>
