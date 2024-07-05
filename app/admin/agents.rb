@@ -9,7 +9,27 @@ ActiveAdmin.register Agent do
     f.actions
   end
 
-  # Add filters for searching and filtering agents
+  show do
+    attributes_table do
+      row :name
+      row :books do |agent|
+        agent.books.map(&:title).join(', ')
+      end
+    end
+  end
+
+  index do
+    selectable_column
+    id_column
+    column :name
+    column :books do |agent|
+      agent.books.map(&:title).join(', ')
+    end
+    actions
+  end
+
   filter :name
-  filter :books_id_eq, as: :select, collection: -> { Book.all.pluck(:title, :id) }
+  filter :books_title_cont, as: :string, label: 'Book Title'
+  filter :created_at
+  filter :updated_at
 end
